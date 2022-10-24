@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "infinitesource:block/infinite_water_source_block"
+    },
+    "facing=south": {
+      "model": "infinitesource:block/infinite_water_source_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "infinitesource:block/infinite_water_source_block",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "infinitesource:block/infinite_water_source_block",
+      "y": 90
+    }
+  }
+}
