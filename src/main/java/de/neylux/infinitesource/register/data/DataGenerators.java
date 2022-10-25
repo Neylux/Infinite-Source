@@ -9,11 +9,14 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.LootTables;
@@ -27,6 +30,7 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -47,6 +51,7 @@ public final class DataGenerators {
         DataGenerator generator = event.getGenerator();
 
         if (event.includeServer()) {
+            generator.addProvider(new GeneratorRecipes(generator));
             generator.addProvider(new GeneratorLoots(generator));
         }
 
@@ -131,6 +136,27 @@ public final class DataGenerators {
         @Override
         protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationContext) {
             map.forEach((name, table) -> LootTables.validate(validationContext, name, table));
+        }
+    }
+
+    static class GeneratorRecipes extends RecipeProvider {
+        public GeneratorRecipes(DataGenerator generator) {
+            super(generator);
+        }
+
+        @Override
+        protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+            Block block = ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get();
+            ShapedRecipeBuilder
+                    .shaped(block)
+                    .define('i', Tags.Items.GLASS)
+                    .define('r', Items.WATER_BUCKET)
+                    .define('d', Tags.Items.GEMS_DIAMOND)
+                    .pattern("iii")
+                    .pattern("rdr")
+                    .pattern("iii")
+                    .unlockedBy("has_diamonds", has(Tags.Items.GEMS_DIAMOND))
+                    .save(consumer);
         }
     }
 

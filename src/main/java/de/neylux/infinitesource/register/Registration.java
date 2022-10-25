@@ -8,7 +8,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -23,9 +22,7 @@ import org.jetbrains.annotations.NotNull;
 public class Registration {
     public static final DeferredRegister<Block> BLOCKS = create(ForgeRegistries.BLOCKS);
     public static final DeferredRegister<Item> ITEMS = create(ForgeRegistries.ITEMS);
-
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = create(ForgeRegistries.BLOCK_ENTITIES);
-
 
     public static final CreativeModeTab INFINITE_SOURCE_TAB = new CreativeModeTab(InfiniteSource.MOD_ID) {
         @Override
@@ -43,9 +40,7 @@ public class Registration {
         ModBlocks.register();
         ModItems.register();
         ModBlockEntities.register();
-
         modEventBus.addListener(Registration::clientSetup);
-
     }
 
     private static void clientSetup(FMLClientSetupEvent event) {
