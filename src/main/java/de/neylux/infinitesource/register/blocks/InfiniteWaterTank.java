@@ -12,7 +12,6 @@ public class InfiniteWaterTank extends FluidTank {
         super(capacity);
     }
 
-
     @Override
     public int getTanks() {
         return 1;
@@ -33,7 +32,6 @@ public class InfiniteWaterTank extends FluidTank {
     public int fill(FluidStack resource, FluidAction action) {
         return 0;
     }
-
 
     @Nonnull
     @Override

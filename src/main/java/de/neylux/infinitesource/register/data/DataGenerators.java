@@ -4,6 +4,7 @@ package de.neylux.infinitesource.register.data;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import de.neylux.infinitesource.InfiniteSource;
+import de.neylux.infinitesource.register.Registration;
 import de.neylux.infinitesource.register.types.ModBlocks;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -33,9 +34,9 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -51,15 +52,15 @@ public final class DataGenerators {
         DataGenerator generator = event.getGenerator();
 
         if (event.includeServer()) {
-            generator.addProvider(new GeneratorRecipes(generator));
-            generator.addProvider(new GeneratorLoots(generator));
+            generator.addProvider(event.includeServer(), new GeneratorRecipes(generator));
+            generator.addProvider(event.includeServer(), new GeneratorLoots(generator));
         }
 
         if (event.includeClient()) {
-            generator.addProvider(new GeneratorBlockTags(generator, event.getExistingFileHelper()));
-            generator.addProvider(new GeneratorLanguage(generator));
-            generator.addProvider(new GeneratorBlockStates(generator, event.getExistingFileHelper()));
-            generator.addProvider(new GeneratorItemModels(generator, event.getExistingFileHelper()));
+            generator.addProvider(event.includeServer(), new GeneratorBlockTags(generator, event.getExistingFileHelper()));
+            generator.addProvider(event.includeServer(), new GeneratorLanguage(generator));
+            generator.addProvider(event.includeServer(), new GeneratorBlockStates(generator, event.getExistingFileHelper()));
+            generator.addProvider(event.includeServer(), new GeneratorItemModels(generator, event.getExistingFileHelper()));
         }
     }
 
@@ -71,7 +72,7 @@ public final class DataGenerators {
         @Override
         protected void registerStatesAndModels() {
             horizontalBlock(ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get(), models()
-                    .cubeAll(ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get().getRegistryName().getPath(),
+                    .cubeAll(Registry.BLOCK.getKey(ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get()).getPath(),
                             modLoc("blocks/infinite_water_source_block")));
         }
     }
@@ -83,7 +84,7 @@ public final class DataGenerators {
 
         @Override
         protected void registerModels() {
-            String path = ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get().getRegistryName().getPath();
+            String path = Registry.BLOCK.getKey(ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get()).getPath();
             getBuilder(path).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
         }
 

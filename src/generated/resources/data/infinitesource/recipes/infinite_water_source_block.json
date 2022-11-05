@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "iii",
-    "rdr",
-    "iii"
-  ],
   "key": {
+    "d": {
+      "tag": "forge:gems/diamond"
+    },
     "i": {
       "tag": "forge:glass"
     },
     "r": {
       "item": "minecraft:water_bucket"
-    },
-    "d": {
-      "tag": "forge:gems/diamond"
     }
   },
+  "pattern": [
+    "iii",
+    "rdr",
+    "iii"
+  ],
   "result": {
     "item": "infinitesource:infinite_water_source_block"
   }
