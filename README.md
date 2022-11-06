@@ -1,6 +1,6 @@
 # Infinite-Source
 
-MC-Version: 1.18.2
+MC-Versions: 1.18.2 & 1.19.2
 
 The mod is a simply revive of the classic simple infinite water source in a single block.
 
