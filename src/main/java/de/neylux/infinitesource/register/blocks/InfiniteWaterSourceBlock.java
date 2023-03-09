@@ -1,7 +1,6 @@
 package de.neylux.infinitesource.register.blocks;
 
 import de.neylux.infinitesource.register.types.ModBlockEntities;
-import de.neylux.infinitesource.register.types.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -19,11 +18,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.wrapper.PlayerInvWrapper;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,7 +71,7 @@ public class InfiniteWaterSourceBlock extends Block implements EntityBlock {
         BlockEntity tank = level.getBlockEntity(blockPos);
         final AtomicBoolean result = new AtomicBoolean(false);
         if (tank != null) {
-            tank.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).ifPresent(handler -> {
+            tank.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(handler -> {
                 PlayerInvWrapper invWrapper = new PlayerInvWrapper(player.getInventory());
                 FluidActionResult fillResult = FluidUtil.tryFillContainerAndStow(itemHeld, handler, invWrapper, Integer.MAX_VALUE, player, true);
                 if (fillResult.isSuccess()) {
