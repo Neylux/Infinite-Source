@@ -32,7 +32,7 @@ public class InfiniteWaterSourceBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public InfiniteWaterSourceBlock() {
-        super(Properties.of(Material.METAL).strength(2f));
+        super(Properties.of(Material.METAL).strength(2f).requiresCorrectToolForDrops());
         registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
