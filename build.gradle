@@ -16,7 +16,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 
 
-version = '1.4'
+version = '1.5'
 group = 'de.neylux.infinitesource' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'infinitesource'
 
