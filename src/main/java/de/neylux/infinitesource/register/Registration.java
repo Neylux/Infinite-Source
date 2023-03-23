@@ -24,9 +24,7 @@ public class Registration {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, InfiniteSource.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, InfiniteSource.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, InfiniteSource.MOD_ID);
-
     public static CreativeModeTab INFINITE_SOURCE_TAB;
-
 
     public static void register() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -46,7 +44,7 @@ public class Registration {
                 builder
                         .title(Component.translatable("item_group." + InfiniteSource.MOD_ID + ".infinitesource_tab"))
                         .icon(() -> ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get().asItem().getDefaultInstance())
-                        .displayItems((featureFlags, output, hasPermission) -> {
+                        .displayItems((itemDisplayParameters, output) -> {
                             Registration.ITEMS.getEntries().forEach(itemRegistryObject -> output.accept(itemRegistryObject.get()));
                             Registration.BLOCKS.getEntries().forEach(blockRegistryObject -> output.accept(blockRegistryObject.get()));
                         })

@@ -56,7 +56,6 @@ public final class DataGenerators {
         boolean includeClient = event.includeClient();
         PackOutput packOutput = event.getGenerator().getPackOutput();
 
-
         // Client
         generator.addProvider(includeClient, new GeneratorLanguage(packOutput));
         generator.addProvider(includeClient, new GeneratorBlockStates(packOutput, event.getExistingFileHelper()));

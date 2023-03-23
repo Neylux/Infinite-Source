@@ -14,9 +14,3 @@ authors = "Neylux" #optional
 description = '''
 Infinite Source adds a single infinite water source block.
 '''
-[[dependencies.infinitesource]] #optional
-modId = "forge"
-mandatory = true
-versionRange = "[44,)"
-ordering = "NONE"
-side = "BOTH"
