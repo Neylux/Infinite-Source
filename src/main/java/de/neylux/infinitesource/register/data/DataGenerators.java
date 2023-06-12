@@ -20,7 +20,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyNameFunction;
@@ -64,7 +63,6 @@ public final class DataGenerators {
         // Server
         generator.addProvider(includeServer, new GeneratorRecipes(packOutput));
         generator.addProvider(includeServer, new GeneratorBlockTags(packOutput, event.getLookupProvider(), event.getExistingFileHelper()));
-        ;
         generator.addProvider(includeServer, new GeneratorItemModels(packOutput, event.getExistingFileHelper()));
 
     }
@@ -97,7 +95,7 @@ public final class DataGenerators {
         }
 
         @Override
-        public String getName() {
+        public @NotNull String getName() {
             return "Item Models";
         }
     }
@@ -130,7 +128,7 @@ public final class DataGenerators {
             @Override
             protected void generate() {
                 LootPool.Builder builder = LootPool.lootPool()
-                        .name(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get())).toString())
+                        //.name(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get())).toString())
                         .setRolls(ConstantValue.exactly(1))
                         .when(ExplosionCondition.survivesExplosion())
                         .add(LootItem.lootTableItem(ModBlocks.INFINITE_WATER_SOURCE_BLOCK.get())
@@ -146,7 +144,7 @@ public final class DataGenerators {
 
         @Override
         protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationContext) {
-            map.forEach((name, table) -> LootTables.validate(validationContext, name, table));
+            //map.forEach((name, table) -> BuiltInLootTables.va(validationContext, name, table));
         }
     }
 
